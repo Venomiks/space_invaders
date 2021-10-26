@@ -129,7 +129,7 @@ while running:
 
     for i in range(num_of_enemies):
         # Game Over
-        if enemyY[i] > 700:
+        if enemyY[i] > 650:
             for j in range(num_of_enemies):
                 enemyY[j] = 2000
             Game_over_text(300, 300)
@@ -137,10 +137,10 @@ while running:
 
         enemyX[i] += enemyX_change[i]
         if enemyX[i] <= 0:
-            enemyX_change[i] = 2
+            enemyX_change[i] = 0.2
             enemyY[i] += enemyY_change[i]
         elif enemyX[i] >= 936:
-            enemyX_change[i] = -2
+            enemyX_change[i] = -0.2
             enemyY[i] += enemyY_change[i]
 
         # Collisions
