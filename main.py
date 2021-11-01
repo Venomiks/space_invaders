@@ -43,7 +43,7 @@ bulletIMG = pygame.image.load("bullet.png")
 bulletX = 0
 bulletY = 700
 bulletX_change = 0
-bulletY_change = 3
+bulletY_change = 1
 # changed "fire" to boolean value
 bullet_state = False
 
@@ -69,9 +69,9 @@ def Game_over_text(x, y):
     over_text = over_font.render("Game Over", True, (255, 0, 0))
     screen.blit(over_text, (300, 300))
 
-def Win(x, y):
+def Win_text(x, y):
     win_text = win_font.render("You win", True, (255, 0, 0))
-    screen.blit(win_text, (300,300))
+    screen.blit(win_text, (400, 400))
 
 def player(x, y):
     screen.blit(playerIMG, (x, y))
@@ -112,11 +112,11 @@ while running:
         # Player movement
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                playerX_change = -3
+                playerX_change = -0.3
             if event.key == pygame.K_RIGHT:
-                playerX_change = 3
+                playerX_change = 0.3
             if event.key == pygame.K_SPACE:
-                if bullet_state is False:
+                if bullet_state == False:
                     # checks current X position of the player
                     bulletX = playerX
                     fire_bullet(bulletX, bulletY)
@@ -142,20 +142,12 @@ while running:
             Game_over_text(300, 300)
             break
 
-
-#TODO
-# make " you win" screen appear on the screen
-        if num_of_enemies == 0:
-            Win(400, 400)
-            break
-
-
         enemyX[i] += enemyX_change[i]
         if enemyX[i] <= 0:
-            enemyX_change[i] = 0.2
+            enemyX_change[i] = 0.1
             enemyY[i] += enemyY_change[i]
         elif enemyX[i] >= 936:
-            enemyX_change[i] = -0.2
+            enemyX_change[i] = -0.1
             enemyY[i] += enemyY_change[i]
 
         # Collisions
@@ -177,10 +169,12 @@ while running:
         bulletY = 700
         bullet_state = False
 
-    if bullet_state is True:
+    if bullet_state == True:
         fire_bullet(bulletX, bulletY)
         bulletY -= bulletY_change
 
+    if num_of_enemies == 0:
+        Win_text(400, 400)
     # calling player and enemy to appear on screen
     player(playerX, playerY)
     show_score(textX, textY)
