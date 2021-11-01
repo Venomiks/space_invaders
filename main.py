@@ -51,8 +51,14 @@ bullet_state = False
 score_value = 0
 font = pygame.font.Font('freesansbold.ttf', 24)
 
+level_value = 1
+level_font = pygame.font.Font('freesansbold.ttf', 20)
+
 textX = 10
 textY = 10
+
+level_textX = 400
+level_textY = 10
 
 # Game over text
 over_font = pygame.font.Font('freesansbold.ttf', 50)
@@ -64,6 +70,10 @@ win_font = pygame.font.Font('freesansbold.ttf', 50)
 def show_score(x,y):
     score = font.render("Score :" + str(score_value), True, (255, 0, 0))
     screen.blit(score, (x, y))
+
+def Level(x, y):
+    level = level_font.render("Level :" + str(level_value), True, (255, 0, 0))
+    screen.blit(level, (x, y))
 
 def Game_over_text(x, y):
     over_text = over_font.render("Game Over", True, (255, 0, 0))
@@ -177,5 +187,6 @@ while running:
         Win_text(400, 400)
     # calling player and enemy to appear on screen
     player(playerX, playerY)
+    Level(level_textX, level_textY)
     show_score(textX, textY)
     pygame.display.update()
